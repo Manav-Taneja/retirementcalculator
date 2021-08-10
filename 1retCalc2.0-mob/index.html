@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ret Calc 2.0 Mob</title>
+    <script src="https://kit.fontawesome.com/c1bed8a266.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div id="intro">
+            <h2>Am I on the right track?</h2>
+            <p>Age based milestones</p>
+            <div id="icons">
+                <i class="fas fa-camera"></i>
+                
+                <label class="button">
+                    <i class="fas fa-upload"></i>
+                    <input type="file" required id="file">
+                </label>
+            </div>
+        </div>
+        <div id="circle"></div>
+    </header>
+    <main>
+        <section id="input-section">
+            <h1>How much should I put aside for retirement?</h1>
+            <form onsubmit="return false">
+                <p>
+                    I am <input type="number" min = "18" max="68" required> years old. My regular pre-tax income is about £ <input type="number" min="10000" max ="999999" required> and the current savings I have now is £ <input type="number" min ="0" max="999999" required> .
+                </p>
+
+                <input type="submit" value="Calculate">
+            </form>
+        </section>
+
+        <div id="sticker">
+            <p>I am on track sticker</p>
+            <i class="fas fa-camera" id="image"></i>
+        </div>
+        
+        <!-- <section id="output-section">
+            <div id="written-portion">
+                <h3>It seems like you are ahead of your game.</h3>
+                <p>It is recommended at your age to began saving <span>17%</span> of your annual income in order to maintain the standard of living after retirement.</p>
+                <p id="note">
+                    (Note: If the result is over 75%, you may need to consider increasing the source of income or seek professional advice.)
+                </p>
+            </div>
+            
+            <div id="camera-portion">
+                <h3>How much should I save each year for retirement?</h3>
+                <div id="image-output">
+                    <img src="images/user-img-old.jpeg" alt="">
+                </div>
+                <p>At age 60, you are recommended to save <span>6x</span> of your salary for retirement.</p>
+            </div>
+        </section>
+
+        <div id="check-friends">
+            <p>Check in with your friends</p>
+            <i class="fas fa-camera"></i>
+        </div> -->
+    </main>
+
+    <!-- <div id ="modal">
+        <div>
+            SOME TEXT
+            <i class="fas fa-camera"></i>
+        </div>
+    </div> -->
+
+    <script src="script.js"></script>
+    <!-- <script src="./add.js"></script> -->
+</body>
+</html>
