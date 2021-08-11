@@ -1,4 +1,6 @@
 //TODO change alert
+//for cross button of loader
+var flag = false
 window.addEventListener('load', function() {
     document.querySelector('header #intro #icons input[type="file"]').addEventListener('change', function() {
         if(this.files && this.files[0]) {
@@ -30,9 +32,15 @@ document.querySelector('#input-section form').addEventListener('submit',async fu
         document.querySelector('#check-friends').remove();
         console.log('cleared html');
     }
-    const url=await sendFile();
+  var loader = document.getElementById("outer-loader")
+    loader.style.display='block'
+    const url = await sendFile();
+  loader.style.display = 'none'
+  if (flag) {
+    flag=false
+    return;
+    }
     document.querySelector('main #sticker').insertAdjacentHTML('afterend', '<section id="output-section"><div id="written-portion"><h3>It seems like you are ahead of your game.</h3><p>It is recommended at your age to began saving <span>17%</span> of your annual income in order to maintain the standard of living after retirement.</p><p id="note">(Note: If the result is over 75%, you may need to consider increasing the source of income or seek professional advice.)</p></div><div id="camera-portion"><h3>How much should I save each year for retirement?</h3><div id="image-output"> <img src='+url+' alt=""></div> <p>At age 60, you are recommended to save <span>6x</span> of your salary for retirement.</p></div></section><div id="check-friends"><p>Check in with your friends</p><i class="fas fa-camera"></i></div>');
-
     var targetSection = document.querySelector('#output-section');
     var interval = setInterval(function() {
         var targetSectionCoordinates = targetSection.getBoundingClientRect();
@@ -49,7 +57,7 @@ function sendFile(){
     const inputFile=document.getElementById("file")
     const file=new FormData();
     file.append("file",inputFile.files[0]);
-    const url="http://169c5bf3f06e.ngrok.io/postrequest"
+    const url="http://"+window.location.hostname+"/postrequest"
     const promise=fetch(url,{
         method: "post",
         body:file,
@@ -68,3 +76,9 @@ function sendFile(){
     //      '<section id="output-section"><div id="written-portion"><h3>It seems like you are ahead of your game.</h3><p>It is recommended at your age to began saving <span>17%</span> of your annual income in order to maintain the standard of living after retirement.</p><p id="note">(Note: If the result is over 75%, you may need to consider increasing the source of income or seek professional advice.)</p></div><div id="camera-portion"><h3>How much should I save each year for retirement?</h3><div id="image-output"> <img src='+url+' alt=""></div> <p>At age 60, you are recommended to save <span>6x</span> of your salary for retirement.</p></div></section><div id="check-friends"><p>Check in with your friends</p><i class="fas fa-camera"></i></div>');
      })
 }
+document.querySelector('.fa-times-circle').addEventListener('click',function(){
+  flag = true;
+  var loader = document.getElementById("outer-loader")
+  loader.style.display = 'none'
+}
+);
