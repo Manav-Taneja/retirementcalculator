@@ -34,13 +34,24 @@ document.querySelector('#input-section form').addEventListener('submit',async fu
     }
   var loader = document.getElementById("outer-loader")
     loader.style.display='block'
+    var list=document.querySelectorAll('form input[type="number"]')
+    var age=list[0].value
+    var income=list[1].value
+    var savings=list[2].value
     const url = await sendFile();
-  loader.style.display = 'none'
-  if (flag) {
+    if(url=="Invalid"){
+        alert("Invaild Image")
+        loader.style.display='none'
+        return;
+    }
+    const statement=await aheadLagging(income,age,savings);
+    const percentage=await calculate(age);
+    loader.style.display = 'none'
+    if (flag) {
     flag=false
     return;
     }
-    document.querySelector('main #sticker').insertAdjacentHTML('afterend', '<section id="output-section"><div id="written-portion"><h3>It seems like you are ahead of your game.</h3><p>It is recommended at your age to began saving <span>17%</span> of your annual income in order to maintain the standard of living after retirement.</p><p id="note">(Note: If the result is over 75%, you may need to consider increasing the source of income or seek professional advice.)</p></div><div id="camera-portion"><h3>How much should I save each year for retirement?</h3><div id="image-output"> <img src='+url+' alt=""></div> <p>At age 60, you are recommended to save <span>6x</span> of your salary for retirement.</p></div></section><div id="check-friends"><p>Check in with your friends</p><i class="fas fa-camera"></i></div>');
+    document.querySelector('main #sticker').insertAdjacentHTML('afterend', '<section id="output-section"><div id="written-portion"><h3>It seems like you are ahead of your game.</h3><p>'+statement+'<span>'+percentage+'%</span> of your annual income in order to maintain the standard of living after retirement.</p><p id="note">(Note: If the result is over 75%, you may need to consider increasing the source of income or seek professional advice.)</p></div><div id="camera-portion"><h3>How much should I save each year for retirement?</h3><div id="image-output"> <img src='+url+' alt=""></div> <p>At age 60, you are recommended to save <span>6x</span> of your salary for retirement.</p></div></section><div id="check-friends"><p>Check in with your friends</p><i class="fas fa-camera"></i></div>');
     var targetSection = document.querySelector('#output-section');
     var interval = setInterval(function() {
         var targetSectionCoordinates = targetSection.getBoundingClientRect();
@@ -63,9 +74,22 @@ function sendFile(){
         body:file,
         headers:{'Access-Control-Allow-Origin':'*'}
     });
-    return promise.then(response=>response.blob())
+    return promise.then((response)=>{
+            if(!response.ok){
+        return "Invalid"
+    }       
+    else{
+        return response.blob()
+    }
+      })
     .then(blob=>{
-       var url = window.URL.createObjectURL(blob);
+        var url;
+        if(blob=="Invalid"){
+            url="Invalid"
+        }
+        else{
+        url = window.URL.createObjectURL(blob);
+        }
        console.log(url) 
        return url;
     //    var b64Response = btoa(response);
@@ -82,3 +106,35 @@ document.querySelector('.fa-times-circle').addEventListener('click',function(){
   loader.style.display = 'none'
 }
 );
+function calculate(age){
+    var percent=0
+    if(age>=18&&age<30){
+        percent=14
+    }
+    else if(age>=30&&age<40){
+        percent=16
+    }
+    else if(age>=40&&age<50){
+        percent=18
+    }
+    else {
+        percent=20
+    }
+    return percent
+}
+function aheadLagging(income,age,savings){
+    var ageDifference=age-18
+    var months=ageDifference*12;
+    const income=income/2
+    const percent=calculate(age)
+    var totalIncome=months*income
+    var predictedSavings=(totalIncome*percent)/100
+    var output;
+    if(savings>=predictedSavings){
+        output="It seems like you are ahead of your game."
+    }
+    else{
+        output="You should consult a broker regarding your retirement savings regards FIL India Contact No->9953420551"
+    }
+    return output
+}
