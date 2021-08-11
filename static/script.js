@@ -51,7 +51,7 @@ document.querySelector('#input-section form').addEventListener('submit',async fu
     flag=false
     return;
     }
-    document.querySelector('main #sticker').insertAdjacentHTML('afterend', '<section id="output-section"><div id="written-portion"><h3>It seems like you are ahead of your game.</h3><p>'+statement+'<span>'+percentage+'%</span> of your annual income in order to maintain the standard of living after retirement.</p><p id="note">(Note: If the result is over 75%, you may need to consider increasing the source of income or seek professional advice.)</p></div><div id="camera-portion"><h3>How much should I save each year for retirement?</h3><div id="image-output"> <img src='+url+' alt=""></div> <p>At age 60, you are recommended to save <span>6x</span> of your salary for retirement.</p></div></section><div id="check-friends"><p>Check in with your friends</p><i class="fas fa-camera"></i></div>');
+    document.querySelector('main #sticker').insertAdjacentHTML('afterend', '<section id="output-section"><div id="written-portion"><h3>'+statement+'</h3><p>It is recommended at your age to began saving <span>'+percentage+'%</span> of your annual income in order to maintain the standard of living after retirement.</p><p id="note">(Note: If the result is over 75%, you may need to consider increasing the source of income or seek professional advice.)</p></div><div id="camera-portion"><h3>How much should I save each year for retirement?</h3><div id="image-output"> <img src='+url+' alt=""></div> <p>At age 60, you are recommended to save <span>6x</span> of your salary for retirement.</p></div></section><div id="check-friends"><p>Check in with your friends</p><i class="fas fa-camera"></i></div>');
     var targetSection = document.querySelector('#output-section');
     var interval = setInterval(function() {
         var targetSectionCoordinates = targetSection.getBoundingClientRect();
@@ -134,7 +134,7 @@ function aheadLagging(income,age,savings){
         output="It seems like you are ahead of your game."
     }
     else{
-        output="You should consult a broker regarding your retirement savings regards FIL India Contact No->9953420551"
+        output="It's time to buckle up your game."
     }
     return output
 }
