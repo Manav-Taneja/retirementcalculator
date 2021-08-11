@@ -84,6 +84,7 @@ main {
 #input-section form input[type="number"] {
   outline: none;
   border: none;
+  text-align:center;
   background: transparent;
   border-bottom: 2px solid #1a53ff;
   font-weight: 700;
@@ -247,4 +248,47 @@ main {
   top: -0.8rem;
   left: -0.8rem;
   transform: rotate(-30deg);
+}
+
+/* LOADER */
+@keyframes flip {
+  0% {
+    transform: rotateY(0);
+  }
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+
+#outer-loader {
+  display: none;
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+  z-index: 100;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader__image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.loader__coin {
+  animation: flip 0.5s ease-in-out infinite alternate-reverse both;
+}
+
+.loader__image .fa-times-circle {
+  position: absolute;
+  font-size: 1.4rem;
+  top: 1rem;
+  right: 1rem;
+  color: rgb(240, 171, 171);
 }
