@@ -125,7 +125,7 @@ function calculate(age){
 function aheadLagging(income,age,savings){
     var ageDifference=age-18
     var months=ageDifference*12;
-    const income=income/2
+    income=income/2
     const percent=calculate(age)
     var totalIncome=months*income
     var predictedSavings=(totalIncome*percent)/100
