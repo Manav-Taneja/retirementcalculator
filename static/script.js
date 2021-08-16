@@ -40,9 +40,9 @@ document.querySelector('#input-section form').addEventListener('submit',async fu
     var savings=list[2].value
     const url = await sendFile();
     if(url=="Invalid"){
-        alert("Invaild Image")
-        loader.style.display='none'
-        return;
+       document.querySelector('main').insertAdjacentHTML('afterend','<div id ="modal"><div>Please Capture or Upload Pic!<i class="fas fa-camera"></i></div></div>');
+       loader.style.display='none'
+       return;
     }
     const statement=await aheadLagging(income,age,savings);
     const percentage=await calculate(age);
